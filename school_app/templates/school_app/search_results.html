@@ -1,0 +1,17 @@
+{% extends 'school_app/base.html' %}
+
+{% block content %}
+<h2>Search Results</h2>
+<ul>
+    {% for student in students %}
+    <li>{{ student.user.username }} - Student</li>
+    {% endfor %}
+    {% for teacher in teachers %}
+    <li>{{ teacher.user.username }} - Teacher</li>
+    {% endfor %}
+    {% for course in courses %}
+    <li>{{ course.course_name }} - Course</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'home' %}">Back to Home</a>
+{% endblock %}
