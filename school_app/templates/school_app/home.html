@@ -3,7 +3,7 @@
 {% block content %}
 <h1>Welcome to School App</h1>
 <p><a href="{% url 'student_add' %}">Add New Student</a></p>
-<!-- Add links for other models -->
+
 <form action="{% url 'search_results' %}" method="get">
     <input type="text" name="q" placeholder="Search...">
     <button type="submit">Search</button>

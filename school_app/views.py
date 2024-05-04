@@ -1,7 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import StudentForm, TeacherForm, CourseForm
@@ -39,8 +37,6 @@ def student_delete(request, pk):
     student.delete()
     return redirect('home')
 
-# Similarly define views for Teacher and Course
-# Views for Teacher
 @login_required
 def teacher_add(request):
     if request.method == 'POST':
@@ -70,7 +66,6 @@ def teacher_delete(request, pk):
     teacher.delete()
     return redirect('home')
 
-# Views for Course
 @login_required
 def course_add(request):
     if request.method == 'POST':
