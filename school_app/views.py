@@ -1,9 +1,11 @@
-from django.shortcuts import render
+
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import StudentForm, TeacherForm, CourseForm
 from .models import Student, Teacher, Course
+from .forms import UserProfileForm
+from .models import UserProfile
 
 def home(request):
     return render(request, 'school_app/home.html')
@@ -101,3 +103,15 @@ def search_results(request):
     teachers = Teacher.objects.filter(user__username__icontains=query)
     courses = Course.objects.filter(course_name__icontains=query)
     return render(request, 'school_app/search_results.html', {'students': students, 'teachers': teachers, 'courses': courses})
+
+@login_required
+def profile(request):
+    user_profile = UserProfile.objects.get(user=request.user)
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = UserProfileForm(instance=user_profile)
+    return render(request, 'school_app/profile.html', {'form': form})
